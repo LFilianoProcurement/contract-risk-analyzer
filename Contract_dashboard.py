@@ -50,7 +50,7 @@ def check_access_code():
         type="password",
         help="Contact Louis Filiano for access code"
     )
-    if code == "Filiano2025":
+    if code == "Birthday-41":
         st.sidebar.success("AI suggestions unlocked!")
         return True
     elif code != "":
