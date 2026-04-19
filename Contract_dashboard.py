@@ -6,8 +6,12 @@ import matplotlib.pyplot as plt
 import csv
 import spacy
 import os
-import tempfile
-from io import StringIO
+import anthropic
+from dotenv import load_dotenv
+
+# Load API key
+load_dotenv()
+api_key = os.getenv("ANTHROPIC_API_KEY")
 
 # ── PAGE CONFIG ────────────────────────────────────────────
 st.set_page_config(
@@ -34,11 +38,30 @@ st.markdown("""
         margin-top: 40px;
         font-family: Arial;
     }
-    .risk-high { color: #C00000; font-weight: bold; }
-    .risk-moderate { color: #FF8C00; font-weight: bold; }
-    .risk-low { color: #375623; font-weight: bold; }
 </style>
 """, unsafe_allow_html=True)
+
+# ── ACCESS CODE FOR AI SUGGESTIONS ────────────────────────
+def check_access_code():
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### AI Suggestions")
+    code = st.sidebar.text_input(
+        "Enter access code for AI suggestions:",
+        type="password",
+        help="Contact Louis Filiano for access code"
+    )
+    if code == "Filiano2025":
+        st.sidebar.success("AI suggestions unlocked!")
+        return True
+    elif code != "":
+        st.sidebar.error("Incorrect access code")
+        return False
+    else:
+        st.sidebar.info(
+            "Enter access code to enable "
+            "AI-powered clause suggestions"
+        )
+        return False
 
 # ── LOAD SPACY ─────────────────────────────────────────────
 @st.cache_resource
@@ -220,6 +243,49 @@ def calculate_risk_score(findings, missing_clauses):
         action = "Do not sign — escalate to legal immediately"
     return score, label, color, action, breakdown
 
+# ── AI SUGGESTION FUNCTIONS ────────────────────────────────
+def get_ai_suggestion(finding, context):
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
+        prompt = f"""You are an expert procurement attorney
+specializing in {context} agreements for regulated manufacturing.
+
+A clause has been flagged as RISKY: {finding['category']}
+Clause: "{finding['sentence']}"
+Trigger: "{finding['trigger_found']}"
+
+Provide:
+RISK EXPLANATION: [2 sentences why this is risky]
+SUGGESTED LANGUAGE: [improved clause protecting the buyer]"""
+        message = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=400,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return message.content[0].text
+    except Exception as e:
+        return f"AI suggestion unavailable: {e}"
+
+def get_missing_suggestion(category, context):
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
+        prompt = f"""You are an expert procurement attorney
+specializing in {context} agreements for regulated manufacturing.
+
+Critical clause MISSING from contract: {category}
+
+Provide:
+WHY IT MATTERS: [2 sentences why this clause is critical]
+RECOMMENDED LANGUAGE: [actual clause language to add]"""
+        message = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=400,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return message.content[0].text
+    except Exception as e:
+        return f"AI suggestion unavailable: {e}"
+
 # ── HEADER ─────────────────────────────────────────────────
 st.markdown(
     "<h1 style='text-align:center;'>📋 Contract Risk Analyzer</h1>",
@@ -245,6 +311,8 @@ uploaded_file = st.sidebar.file_uploader(
     help="Upload a plain text version of your contract"
 )
 
+ai_enabled = check_access_code()
+
 st.sidebar.markdown("---")
 st.sidebar.markdown("### About This Tool")
 st.sidebar.markdown("""
@@ -259,11 +327,9 @@ Detects risky clauses across:
 # ── MAIN CONTENT ───────────────────────────────────────────
 if uploaded_file is not None:
 
-    # Read contract text
     contract_text = uploaded_file.read().decode("utf-8")
     contract_config = CONTRACT_TYPES[contract_type]
 
-    # Load library and analyze
     with st.spinner("Loading clause library..."):
         library = load_clause_library(contract_config["library"])
 
@@ -287,7 +353,6 @@ if uploaded_file is not None:
     c4.metric("Missing Critical", len(missing))
     c5.metric("Risk Score", f"{score}/100")
 
-    # Risk score gauge
     st.markdown("### Overall Risk Score")
     col_score, col_action = st.columns([1, 2])
 
@@ -328,10 +393,6 @@ if uploaded_file is not None:
     st.markdown("## Risk Score Breakdown")
     sorted_bd = sorted(breakdown.items(),
                        key=lambda x: x[1], reverse=True)
-    bd_df = pd.DataFrame(sorted_bd,
-                         columns=["Category", "Risk Points"])
-    bd_df["Type"] = bd_df["Category"].apply(
-        lambda x: "Missing Clause" if "MISSING" in x else "Found Clause")
 
     fig2, ax2 = plt.subplots(figsize=(12, 5))
     colors_bd = ["#C00000" if "MISSING" in cat else "#2E75B6"
@@ -368,10 +429,15 @@ if uploaded_file is not None:
                     f"**Risk Category:** {f['category']}  |  "
                     f"**Weight:** "
                     f"{CATEGORY_WEIGHTS.get(f['category'], 5)}/10")
-                st.info(
-                    "Run locally with AI suggestions enabled "
-                    "to see Claude-generated improved language "
-                    "for this clause.")
+                if ai_enabled and api_key:
+                    with st.spinner("Getting AI suggestion..."):
+                        suggestion = get_ai_suggestion(
+                            f, contract_config["context"])
+                        st.success(suggestion)
+                else:
+                    st.info(
+                        "Enter access code in sidebar "
+                        "to unlock AI-powered suggested language.")
     else:
         st.success("No risky clauses detected!")
 
@@ -395,9 +461,16 @@ if uploaded_file is not None:
                 st.markdown(
                     f"This clause is critical for "
                     f"**{contract_type}** agreements.")
-                st.info(
-                    "Run locally with AI suggestions enabled "
-                    "to generate recommended clause language.")
+                if ai_enabled and api_key:
+                    with st.spinner(
+                        "Getting recommended language..."):
+                        suggestion = get_missing_suggestion(
+                            cat, contract_config["context"])
+                        st.success(suggestion)
+                else:
+                    st.info(
+                        "Enter access code in sidebar "
+                        "to unlock AI-powered recommended language.")
     else:
         st.success("All critical clauses detected!")
 
@@ -429,7 +502,7 @@ if uploaded_file is not None:
             "Risk Level": f["risk_level"],
             "Trigger Found": f["trigger_found"],
             "Contract Sentence": f["sentence"],
-            "AI Suggestion": "Run locally for AI suggestions"
+            "AI Suggestion": "Enter access code for AI suggestions"
         })
     for cat in missing:
         output_rows.append({
@@ -438,7 +511,7 @@ if uploaded_file is not None:
             "Risk Level": "Critical",
             "Trigger Found": "N/A",
             "Contract Sentence": "Clause not found in contract",
-            "AI Suggestion": "Run locally for AI suggestions"
+            "AI Suggestion": "Enter access code for AI suggestions"
         })
     for f in acceptable:
         output_rows.append({
@@ -461,11 +534,10 @@ if uploaded_file is not None:
             mime="text/csv"
         )
 
-    # FOOTER
     st.markdown(
         "<div class='footer'>Contract Risk Analyzer  |  "
         "Louis Filiano  |  "
-        "Powered by Python, spaCy & Scikit-Learn</div>",
+        "Powered by Python, spaCy & Claude AI</div>",
         unsafe_allow_html=True)
 
 else:
@@ -502,3 +574,4 @@ else:
 
         **MRO & MSA Risks also detected**
         """)
+        Add access code for AI suggestions
