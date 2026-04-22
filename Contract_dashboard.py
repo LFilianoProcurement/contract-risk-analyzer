@@ -76,70 +76,219 @@ CONTRACT_TYPES = {
         "library": "clause_library_sterilization.csv",
         "context": "sterilization services for regulated manufacturing",
         "critical_missing": [
-            "Business Continuity", "Capacity Commitment",
-            "Termination Rights", "Liability Cap",
-            "Sterilization Certificate", "Validation Protocol",
-            "Dose Mapping", "ETO Residual Limits"
-        ]
+            "Parties & Legal Entities", "Term & Renewal", "Scope of Supply",
+            "Product Specifications", "Pricing", "Delivery Terms",
+            "Payment Terms", "Invoicing",
+            "Quality Standards", "Warranties", "Inspection & Acceptance",
+            "Compliance with Laws", "Regulatory Requirements", "Insurance",
+            "Indemnification", "Liability Cap", "Product Recall",
+            "Confidentiality", "Intellectual Property",
+            "Termination for Convenience", "Termination for Cause", "Effect of Termination",
+            "Force Majeure", "Business Continuity",
+            "Governing Law", "Dispute Resolution", "Assignment",
+            "Capacity Commitment", "Sterilization Certificate", "Validation Protocol",
+            "Dose Mapping", "ETO Residual Limits", "Facility Change Control", "Parent Guarantee"
+        ],
+        "clause_groups": {
+            "Basic Contract Setup": ["Parties & Legal Entities", "Term & Renewal", "Scope of Supply", "Definitions"],
+            "Products & Delivery": ["Product Specifications", "Pricing", "Delivery Terms", "Title & Risk of Loss", "Forecasting & Ordering", "Packaging & Labeling"],
+            "Payment & Financial": ["Payment Terms", "Invoicing", "Taxes & Duties", "Currency"],
+            "Quality & Performance": ["Quality Standards", "Warranties", "Inspection & Acceptance", "Remedies & Cure"],
+            "Compliance & Responsibility": ["Compliance with Laws", "Regulatory Requirements", "Ethics & Code of Conduct", "Insurance"],
+            "Liability & Risk": ["Indemnification", "Liability Cap", "Product Recall"],
+            "Confidentiality & Data": ["Confidentiality", "Data Protection & Privacy", "Intellectual Property"],
+            "Termination & Exit": ["Termination for Convenience", "Termination for Cause", "Effect of Termination"],
+            "Force Majeure & Continuity": ["Force Majeure", "Business Continuity"],
+            "General Boilerplate": ["Governing Law", "Dispute Resolution", "Assignment", "Subcontracting", "Amendments & Modifications", "Notices", "Entire Agreement"],
+            "Sterilization Specific": ["Capacity Commitment", "Sterilization Certificate", "Validation Protocol", "Dose Mapping", "ETO Residual Limits", "Facility Change Control", "Parent Guarantee", "LLC Structure Risk", "Covered Entity Scope"]
+        }
     },
     "MRO / Indirect Spend Agreement": {
         "library": "clause_library_mro.csv",
         "context": "MRO and indirect spend procurement",
         "critical_missing": [
-            "Termination Rights", "Liability Cap",
-            "Delivery & Lead Time", "Warranty",
-            "Inventory & Availability", "Pricing & Catalog"
-        ]
+            "Parties & Legal Entities", "Term & Renewal", "Scope of Supply",
+            "Product Specifications", "Pricing", "Delivery Terms",
+            "Payment Terms", "Invoicing", "Quality Standards", "Warranties",
+            "Compliance with Laws", "Insurance",
+            "Indemnification", "Liability Cap",
+            "Confidentiality", "Termination for Convenience", "Termination for Cause",
+            "Force Majeure", "Business Continuity", "Governing Law", "Dispute Resolution"
+        ],
+        "clause_groups": {
+            "Basic Contract Setup": ["Parties & Legal Entities", "Term & Renewal", "Scope of Supply", "Definitions"],
+            "Products & Delivery": ["Product Specifications", "Pricing", "Delivery Terms", "Title & Risk of Loss", "Forecasting & Ordering"],
+            "Payment & Financial": ["Payment Terms", "Invoicing", "Taxes & Duties"],
+            "Quality & Performance": ["Quality Standards", "Warranties", "Inspection & Acceptance"],
+            "Compliance & Responsibility": ["Compliance with Laws", "Insurance"],
+            "Liability & Risk": ["Indemnification", "Liability Cap"],
+            "Confidentiality & Data": ["Confidentiality", "Intellectual Property"],
+            "Termination & Exit": ["Termination for Convenience", "Termination for Cause", "Effect of Termination"],
+            "Force Majeure & Continuity": ["Force Majeure", "Business Continuity"],
+            "General Boilerplate": ["Governing Law", "Dispute Resolution", "Assignment", "Subcontracting", "Entire Agreement"]
+        }
     },
     "Supplier MSA (Master Service Agreement)": {
         "library": "clause_library_msa.csv",
         "context": "master service agreements for supplier partnerships",
         "critical_missing": [
-            "Termination Rights", "Liability Cap",
-            "Confidentiality", "Scope of Services",
-            "Service Levels", "Data Protection"
-        ]
+            "Parties & Legal Entities", "Term & Renewal", "Scope of Supply",
+            "Payment Terms", "Invoicing",
+            "Quality Standards", "Compliance with Laws", "Insurance",
+            "Indemnification", "Liability Cap",
+            "Confidentiality", "Data Protection & Privacy", "Intellectual Property",
+            "Termination for Convenience", "Termination for Cause", "Effect of Termination",
+            "Force Majeure", "Business Continuity", "Governing Law", "Dispute Resolution"
+        ],
+        "clause_groups": {
+            "Basic Contract Setup": ["Parties & Legal Entities", "Term & Renewal", "Scope of Supply", "Definitions"],
+            "Payment & Financial": ["Payment Terms", "Invoicing"],
+            "Compliance & Responsibility": ["Compliance with Laws", "Ethics & Code of Conduct", "Insurance"],
+            "Liability & Risk": ["Indemnification", "Liability Cap"],
+            "Confidentiality & Data": ["Confidentiality", "Data Protection & Privacy", "Intellectual Property"],
+            "Termination & Exit": ["Termination for Convenience", "Termination for Cause", "Effect of Termination"],
+            "Force Majeure & Continuity": ["Force Majeure", "Business Continuity"],
+            "General Boilerplate": ["Governing Law", "Dispute Resolution", "Assignment", "Amendments & Modifications", "Entire Agreement"]
+        }
     },
     "General Procurement Agreement": {
         "library": "clause_library_general.csv",
         "context": "general procurement agreements",
         "critical_missing": [
-            "Termination Rights", "Liability Cap",
-            "Indemnification", "Price Escalation"
-        ]
+            "Parties & Legal Entities", "Term & Renewal", "Scope of Supply",
+            "Product Specifications", "Pricing", "Delivery Terms",
+            "Payment Terms", "Invoicing", "Quality Standards", "Warranties",
+            "Compliance with Laws", "Insurance",
+            "Indemnification", "Liability Cap",
+            "Confidentiality", "Termination for Convenience", "Termination for Cause",
+            "Force Majeure", "Governing Law", "Dispute Resolution", "Assignment"
+        ],
+        "clause_groups": {
+            "Basic Contract Setup": ["Parties & Legal Entities", "Term & Renewal", "Scope of Supply", "Definitions"],
+            "Products & Delivery": ["Product Specifications", "Pricing", "Delivery Terms", "Title & Risk of Loss"],
+            "Payment & Financial": ["Payment Terms", "Invoicing", "Taxes & Duties"],
+            "Quality & Performance": ["Quality Standards", "Warranties", "Inspection & Acceptance"],
+            "Compliance & Responsibility": ["Compliance with Laws", "Insurance"],
+            "Liability & Risk": ["Indemnification", "Liability Cap"],
+            "Confidentiality & Data": ["Confidentiality", "Intellectual Property"],
+            "Termination & Exit": ["Termination for Convenience", "Termination for Cause", "Effect of Termination"],
+            "Force Majeure & Continuity": ["Force Majeure", "Business Continuity"],
+            "General Boilerplate": ["Governing Law", "Dispute Resolution", "Assignment", "Subcontracting", "Entire Agreement"]
+        }
     }
 }
 
 # ── WEIGHTS & SCORING ──────────────────────────────────────
 CATEGORY_WEIGHTS = {
+    # Existing sterilization-specific
     "Auto-Renewal": 9, "Liability Cap": 10,
-    "Indemnification": 9, "Payment Terms": 7,
+    "Indemnification": 9, "Payment Terms": 8,
     "Price Escalation": 9, "Termination Rights": 10,
-    "Force Majeure": 6, "Intellectual Property": 7,
-    "Exclusivity": 8, "Governing Law": 5,
+    "Force Majeure": 7, "Intellectual Property": 8,
+    "Exclusivity": 8, "Governing Law": 6,
     "Dose Mapping": 9, "Bioburden Management": 8,
     "Sterilization Certificate": 8, "Capacity Commitment": 10,
     "Business Continuity": 10, "Regulatory Change": 8,
     "Validation Protocol": 10, "ETO Residual Limits": 9,
+    "Facility Change Control": 9, "Parent Guarantee": 9,
+    "LLC Structure Risk": 9, "Covered Entity Scope": 8,
+    "Regulatory Action by Entity": 8, "Insurance by Entity": 7,
+    # New standard clauses
+    "Parties & Legal Entities": 8,
+    "Definitions": 5,
+    "Term & Renewal": 8,
+    "Scope of Supply": 9,
+    "Product Specifications": 9,
+    "Forecasting & Ordering": 7,
+    "Pricing": 9,
+    "Delivery Terms": 8,
+    "Title & Risk of Loss": 7,
+    "Packaging & Labeling": 6,
+    "Invoicing": 7,
+    "Taxes & Duties": 6,
+    "Currency": 5,
+    "Quality Standards": 9,
+    "Inspection & Acceptance": 8,
+    "Warranties": 9,
+    "Remedies & Cure": 8,
+    "Compliance with Laws": 9,
+    "Regulatory Requirements": 9,
+    "Ethics & Code of Conduct": 6,
+    "Insurance": 8,
+    "Product Recall": 9,
+    "Confidentiality": 9,
+    "Data Protection & Privacy": 9,
+    "Termination for Convenience": 8,
+    "Termination for Cause": 9,
+    "Effect of Termination": 7,
+    "Dispute Resolution": 7,
+    "Assignment": 7,
+    "Subcontracting": 7,
+    "Amendments & Modifications": 6,
+    "Notices": 5,
+    "Entire Agreement": 6,
+    # Legacy
     "Delivery & Lead Time": 9, "Warranty": 8,
     "Inventory & Availability": 8, "Pricing & Catalog": 7,
-    "Confidentiality": 9, "Scope of Services": 8,
-    "Service Levels": 9, "Data Protection": 9,
+    "Scope of Services": 8, "Service Levels": 9,
+    "Data Protection": 9,
 }
 
 RISK_LEVEL_MULTIPLIER = {
     "Risky": 1.0, "Acceptable": 0.3, "Preferred": 0.0}
 
 MISSING_CLAUSE_PENALTY = {
+    # Sterilization specific
     "Business Continuity": 15, "Capacity Commitment": 12,
     "Validation Protocol": 12, "Sterilization Certificate": 10,
     "Dose Mapping": 8, "ETO Residual Limits": 8,
-    "Termination Rights": 12, "Liability Cap": 12,
-    "Indemnification": 8, "Price Escalation": 7,
+    "Facility Change Control": 10, "Parent Guarantee": 10,
+    "LLC Structure Risk": 8, "Covered Entity Scope": 8,
+    # Standard contract
+    "Parties & Legal Entities": 10,
+    "Term & Renewal": 8,
+    "Scope of Supply": 10,
+    "Product Specifications": 10,
+    "Pricing": 10,
+    "Delivery Terms": 9,
+    "Title & Risk of Loss": 7,
+    "Forecasting & Ordering": 7,
+    "Packaging & Labeling": 5,
+    "Payment Terms": 10,
+    "Invoicing": 7,
+    "Taxes & Duties": 6,
+    "Currency": 5,
+    "Quality Standards": 10,
+    "Warranties": 10,
+    "Inspection & Acceptance": 9,
+    "Remedies & Cure": 8,
+    "Compliance with Laws": 10,
+    "Regulatory Requirements": 10,
+    "Ethics & Code of Conduct": 6,
+    "Insurance": 9,
+    "Indemnification": 10,
+    "Liability Cap": 12,
+    "Product Recall": 10,
+    "Confidentiality": 10,
+    "Data Protection & Privacy": 10,
+    "Intellectual Property": 8,
+    "Termination for Convenience": 9,
+    "Termination for Cause": 10,
+    "Effect of Termination": 7,
+    "Force Majeure": 8,
+    "Governing Law": 7,
+    "Dispute Resolution": 8,
+    "Assignment": 7,
+    "Subcontracting": 7,
+    "Amendments & Modifications": 6,
+    "Notices": 5,
+    "Entire Agreement": 6,
+    # Legacy
+    "Termination Rights": 12, "Price Escalation": 7,
     "Delivery & Lead Time": 10, "Warranty": 8,
     "Inventory & Availability": 8, "Pricing & Catalog": 7,
-    "Confidentiality": 10, "Scope of Services": 9,
-    "Service Levels": 10, "Data Protection": 10,
+    "Scope of Services": 9, "Service Levels": 10,
+    "Data Protection": 10,
 }
 
 MIN_SENTENCE_LENGTH = {
@@ -159,6 +308,7 @@ EXCLUSION_PHRASES = {
 # ── CORE FUNCTIONS ─────────────────────────────────────────
 @st.cache_data
 def load_clause_library(filepath):
+    """Load clause library — supports both old (4-col) and new (7-col) format"""
     library = {}
     with open(filepath, "r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
@@ -306,9 +456,9 @@ contract_type = st.sidebar.selectbox(
 )
 
 uploaded_file = st.sidebar.file_uploader(
-    "Upload Contract (.txt)",
-    type=["txt"],
-    help="Upload a plain text version of your contract"
+    "Upload Contract",
+    type=["txt", "docx", "pdf"],
+    help="Upload your contract as a Word document (.docx), PDF, or plain text (.txt)"
 )
 
 ai_enabled = check_access_code()
@@ -327,7 +477,62 @@ Detects risky clauses across:
 # ── MAIN CONTENT ───────────────────────────────────────────
 if uploaded_file is not None:
 
-    contract_text = uploaded_file.read().decode("utf-8")
+    # Extract text based on file type
+    file_ext = uploaded_file.name.split(".")[-1].lower()
+
+    if file_ext == "txt":
+        contract_text = uploaded_file.read().decode("utf-8")
+
+    elif file_ext == "docx":
+        try:
+            from docx import Document
+            import io
+            doc = Document(io.BytesIO(uploaded_file.read()))
+            paragraphs = []
+            for para in doc.paragraphs:
+                if para.text.strip():
+                    paragraphs.append(para.text.strip())
+            # Also extract from tables
+            for table in doc.tables:
+                for row in table.rows:
+                    for cell in row.cells:
+                        if cell.text.strip():
+                            paragraphs.append(cell.text.strip())
+            contract_text = " ".join(paragraphs)
+        except ImportError:
+            st.error("python-docx is required for Word documents. Run: pip install python-docx")
+            st.stop()
+        except Exception as e:
+            st.error(f"Could not read Word document: {e}")
+            st.stop()
+
+    elif file_ext == "pdf":
+        try:
+            import pdfplumber
+            import io
+            pages = []
+            with pdfplumber.open(io.BytesIO(uploaded_file.read())) as pdf:
+                for page in pdf.pages:
+                    text = page.extract_text()
+                    if text:
+                        pages.append(text)
+            contract_text = " ".join(pages)
+        except ImportError:
+            st.error("pdfplumber is required for PDF files. Run: pip install pdfplumber")
+            st.stop()
+        except Exception as e:
+            st.error(f"Could not read PDF: {e}")
+            st.stop()
+
+    else:
+        st.error(f"Unsupported file type: {file_ext}")
+        st.stop()
+
+    if not contract_text.strip():
+        st.error("Could not extract text from the uploaded file. Please check the file is not empty or password protected.")
+        st.stop()
+
+    st.sidebar.success(f"✅ Loaded: {uploaded_file.name} ({len(contract_text):,} characters)")
     contract_config = CONTRACT_TYPES[contract_type]
 
     with st.spinner("Loading clause library..."):
@@ -346,12 +551,17 @@ if uploaded_file is not None:
     # ── SECTION 1: EXECUTIVE SUMMARY ──────────────────────
     st.markdown("## Executive Summary")
 
-    c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("Contract Type", contract_type.split("(")[0].strip())
+    commercial_risky = [f for f in risky if f.get("term_type") == "Commercial"]
+    legal_risky = [f for f in risky if f.get("term_type") == "Legal"]
+
+    c1, c2, c3, c4, c5, c6, c7 = st.columns(7)
+    c1.metric("Contract Type", contract_type.split("(")[0].strip()[:20])
     c2.metric("Sentences Analyzed", len(sentences))
     c3.metric("Risky Clauses", len(risky))
-    c4.metric("Missing Critical", len(missing))
-    c5.metric("Risk Score", f"{score}/100")
+    c4.metric("🟦 Commercial", len(commercial_risky))
+    c5.metric("⚖️ Legal", len(legal_risky))
+    c6.metric("Missing Critical", len(missing))
+    c7.metric("Risk Score", f"{score}/100")
 
     st.markdown("### Overall Risk Score")
     col_score, col_action = st.columns([1, 2])
@@ -425,10 +635,21 @@ if uploaded_file is not None:
                 f"Trigger: '{f['trigger_found']}'"):
                 st.markdown("**Original Clause:**")
                 st.warning(f['sentence'])
+                # Get Term Type from library if available
+                term_type = f.get("term_type", "")
+                term_badge = ""
+                if term_type == "Commercial":
+                    term_badge = "🟦 **Commercial Term**"
+                elif term_type == "Legal":
+                    term_badge = "⚖️ **Legal Term**"
+                clause_group = f.get("clause_group", "")
                 st.markdown(
                     f"**Risk Category:** {f['category']}  |  "
                     f"**Weight:** "
-                    f"{CATEGORY_WEIGHTS.get(f['category'], 5)}/10")
+                    f"{CATEGORY_WEIGHTS.get(f['category'], 5)}/10  |  "
+                    f"{term_badge}")
+                if clause_group:
+                    st.markdown(f"**Section:** {clause_group}")
                 if ai_enabled and api_key:
                     with st.spinner("Getting AI suggestion..."):
                         suggestion = get_ai_suggestion(
@@ -451,6 +672,32 @@ if uploaded_file is not None:
         st.error(
             f"{len(missing)} critical clauses are missing "
             f"from this contract.")
+
+        # Group missing clauses by section
+        clause_groups = contract_config.get("clause_groups", {})
+        if clause_groups:
+            st.markdown("### Missing Clauses by Section")
+            for group_name, group_clauses in clause_groups.items():
+                missing_in_group = [c for c in missing if c in group_clauses]
+                present_in_group = [c for c in group_clauses if c not in missing]
+                if not group_clauses:
+                    continue
+                coverage_pct = int((len(present_in_group) / len(group_clauses)) * 100)
+                color = "#16A34A" if coverage_pct == 100 else "#DC2626" if coverage_pct < 50 else "#D97706"
+                status_icon = "✅" if coverage_pct == 100 else "⚠️" if coverage_pct >= 50 else "❌"
+                with st.expander(f"{status_icon} {group_name} — {coverage_pct}% covered ({len(missing_in_group)} missing)"):
+                    if present_in_group:
+                        st.markdown("**Present:**")
+                        for c in present_in_group:
+                            st.markdown(f"  ✅ {c}")
+                    if missing_in_group:
+                        st.markdown("**Missing:**")
+                        for c in missing_in_group:
+                            penalty = MISSING_CLAUSE_PENALTY.get(c, 5)
+                            st.markdown(f"  ❌ **{c}** (+{penalty} risk points)")
+            st.markdown("---")
+            st.markdown("### Missing Clause Details")
+
         for cat in missing:
             penalty = MISSING_CLAUSE_PENALTY.get(cat, 5)
             with st.expander(
@@ -574,4 +821,3 @@ else:
 
         **MRO & MSA Risks also detected**
         """)
-      
