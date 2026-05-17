@@ -1,3 +1,19 @@
+# ============================================================
+# Contract Risk Analyzer
+# Project 2 — Procurement Intelligence Suite
+#
+# Copyright (c) 2026 Louis T. Filiano, MBA
+# All Rights Reserved.
+#
+# This software and its source code are proprietary and
+# confidential. Unauthorized copying, distribution, or use
+# of this file, via any medium, is strictly prohibited.
+#
+# Author:  Louis T. Filiano, MBA
+# Contact: filianowork@gmail.com | (214) 907-3294
+# GitHub:  github.com/LFilianoProcurement
+# ============================================================
+
 import streamlit as st
 import pandas as pd
 import matplotlib
@@ -50,7 +66,7 @@ def check_access_code():
         type="password",
         help="Contact Louis Filiano for access code"
     )
-    if code == "Birthday-41":
+    if code == "Filiano2025":
         st.sidebar.success("AI suggestions unlocked!")
         return True
     elif code != "":
@@ -473,6 +489,10 @@ Detects risky clauses across:
 - Termination Rights & Force Majeure
 - Contract-specific categories
 """)
+st.sidebar.markdown("---")
+st.sidebar.markdown('<p style="color:#9CA3AF; font-size:0.72rem; text-align:center;">© 2026 Louis T. Filiano, MBA<br>All Rights Reserved</p>', unsafe_allow_html=True)
+st.sidebar.markdown("---")
+st.sidebar.markdown('<p style="color:#9CA3AF; font-size:0.72rem; text-align:center;">© 2026 Louis T. Filiano, MBA<br>All Rights Reserved</p>', unsafe_allow_html=True)
 
 # ── MAIN CONTENT ───────────────────────────────────────────
 if uploaded_file is not None:
@@ -786,6 +806,10 @@ if uploaded_file is not None:
         "Louis Filiano  |  "
         "Powered by Python, spaCy & Claude AI</div>",
         unsafe_allow_html=True)
+    st.markdown(
+        "<div style='text-align:center; color:#9CA3AF; font-size:0.72rem; margin-top:4px;'>"
+        "© 2026 Louis T. Filiano, MBA — All Rights Reserved</div>",
+        unsafe_allow_html=True)
 
 else:
     st.info(
@@ -821,3 +845,4 @@ else:
 
         **MRO & MSA Risks also detected**
         """)
+    
